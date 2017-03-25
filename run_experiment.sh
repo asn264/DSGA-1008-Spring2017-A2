@@ -1,5 +1,7 @@
+#!/bin/bash 
+
 #SBATCH --output=normal_two_layer_100_hidden_100_embeddding.out
-#SBATCH -t 0-2:00 
+#SBATCH -t 0-3:30 
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=asn264@nyu.edu
 
