@@ -18,10 +18,16 @@ class RNNModel(nn.Module):
         self.nlayers = nlayers
 
     def init_weights(self):
+
+        '''
         initrange = 0.1
         self.encoder.weight.data.uniform_(-initrange, initrange)
         self.decoder.bias.data.fill_(0)
         self.decoder.weight.data.uniform_(-initrange, initrange)
+        '''
+        self.encoder.weight.data.normal_()
+        self.decoder.bias.data.normal_()
+        self.decoder.weight.data.normal_()
 
     def forward(self, input, hidden):
         emb = self.encoder(input)
