@@ -19,7 +19,7 @@ parser.add_argument('--nhid', type=int, default=50,
                     help='humber of hidden units per layer')
 parser.add_argument('--nlayers', type=int, default=1,
                     help='number of layers')
-parser.add_argument('--lr', type=float, default=20,
+parser.add_argument('--lr', type=float, default=20.0,
                     help='initial learning rate')
 parser.add_argument('--clip', type=float, default=0.5,
                     help='gradient clipping')
@@ -158,7 +158,7 @@ for epoch in range(1, args.epochs+1):
     print('-' * 89)
     # Anneal the learning rate.
     if prev_val_loss and val_loss > prev_val_loss:
-        lr /= 4
+        lr /= 4.0
     prev_val_loss = val_loss
 
 
