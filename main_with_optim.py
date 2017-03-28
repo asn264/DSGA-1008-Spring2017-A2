@@ -134,9 +134,9 @@ def train(optimizer):
 
         optimizer.step()
 
-        clipped_lr = lr * clip_gradient(model, args.clip)
-        for p in model.parameters():
-            p.data.add_(-clipped_lr, p.grad.data)
+        #clipped_lr = lr * clip_gradient(model, args.clip)
+        #for p in model.parameters():
+        #    p.data.add_(-clipped_lr, p.grad.data)
 
         total_loss += loss.data
 
