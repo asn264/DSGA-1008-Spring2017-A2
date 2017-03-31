@@ -152,7 +152,7 @@ def train(optimizer):
 
 
 # Loop over epochs.
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9)
 
 lr = args.lr
 prev_val_loss = None
