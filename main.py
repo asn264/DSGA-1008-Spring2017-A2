@@ -7,6 +7,7 @@ from torch.autograd import Variable
 
 import data
 import model
+import random
 
 parser = argparse.ArgumentParser(description='PyTorch PennTreeBank RNN/LSTM Language Model')
 parser.add_argument('--data', type=str, default='./data/penn',
@@ -37,6 +38,7 @@ parser.add_argument('--log-interval', type=int, default=200, metavar='N',
                     help='report interval')
 parser.add_argument('--save', type=str,  default='model.pt',
                     help='path to save the final model')
+parser.add_argument('--shuffle', type=bool, default=False, help='bool to shuffle batches')
 args = parser.parse_args()
 
 # Set the random seed manually for reproducibility.
@@ -119,7 +121,13 @@ def train():
     start_time = time.time()
     ntokens = len(corpus.dictionary)
     hidden = model.init_hidden(args.batch_size)
-    for batch, i in enumerate(range(0, train_data.size(0) - 1, args.bptt)):
+
+    x = range(0, train_data.size(0) - 1, args.bptt)
+    if args.shuffle:
+        print 'Shuffling training batches'
+        random.shuffle(x)
+
+    for batch, i in enumerate(x):
         data, targets = get_batch(train_data, i)
         hidden = repackage_hidden(hidden)
         model.zero_grad()
