@@ -8,7 +8,7 @@ class RNNModel(nn.Module):
     def __init__(self, rnn_type, ntoken, ninp, nhid, nlayers):
         super(RNNModel, self).__init__()
         self.encoder = nn.Embedding(ntoken, ninp)
-        self.rnn = getattr(nn, rnn_type)(ninp, nhid, nlayers, bias=False)
+        self.rnn = getattr(nn, rnn_type)(ninp, nhid, nlayers, dropout=0.5, bias=False)
         self.decoder = nn.Linear(nhid, ntoken)
 
         self.init_weights()
