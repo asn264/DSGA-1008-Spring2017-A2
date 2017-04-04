@@ -8,6 +8,7 @@ Loads our best model and reports perplexity on the test data. Please see write-u
 import argparse
 import torch
 import math
+import data
 
 parser = argparse.ArgumentParser(description='PyTorch PennTreeBank RNN/LSTM Language Model')
 parser.add_argument('--data', type=str, default='./data/penn',
