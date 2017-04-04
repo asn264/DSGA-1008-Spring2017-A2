@@ -45,10 +45,32 @@ def evaluate(data_source):
 	return total_loss[0] / len(data_source)
 
 
+def get_batch(source, i, evaluation=False):
+
+	'''Copied from starter code main.py file '''
+
+	seq_len = min(args.bptt, len(source) - 1 - i)
+	data = Variable(source[i:i+seq_len], volatile=evaluation)
+	target = Variable(source[i+1:i+1+seq_len].view(-1))
+	return data, target
+
+
+def repackage_hidden(h):
+	'''Copied from starter code main.py file '''
+
+	"""Wraps hidden states in new Variables, to detach them from their history."""
+	if type(h) == Variable:
+		return Variable(h.data)
+	else:
+		return tuple(repackage_hidden(v) for v in h)
+
+
 with open(args.checkpoint, 'rb') as f:
 	model = torch.load(f)
 
 model.cpu()
+
+criterion = nn.CrossEntropyLoss()
 
 corpus = data.Corpus(args.data)
 eval_batch_size = 10
