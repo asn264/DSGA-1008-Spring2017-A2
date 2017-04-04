@@ -14,6 +14,8 @@ parser = argparse.ArgumentParser(description='PyTorch PennTreeBank RNN/LSTM Lang
 parser.add_argument('--data', type=str, default='./data/penn',
                     help='location of the data corpus')
 parser.add_argument('--checkpoint', type=str, default='./dropout_point3_two_layer_200_hidden_200_embeddding.m')
+parser.add_argument('--bptt', type=int, default=20,
+                    help='sequence length')
 args = parser.parse_args()
 
 
