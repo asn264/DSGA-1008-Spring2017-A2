@@ -15,11 +15,12 @@ parser.add_argument('--vocab_size', type=int,  default=10000,
                     help='threshold for vocabulary')
 parser.add_argument('--data', type=str, default='./data/penn/',
                     help='location of the data corpus')
+parser.add_argument('--checkpoint', type=str, default='./baseline.m', help='model checkpoint')
 args = parser.parse_args()
 
 def visualize_embeddings():
     #load model checkpoint
-    the_model = torch.load('model_checkpoints/2_layers.pt')
+    the_model = torch.load(args.checkpoint)
 
     #convert embedding weights to numpy matrix
     embedding_matrix = the_model.encoder.weight.data.numpy()
