@@ -78,9 +78,12 @@ criterion = nn.CrossEntropyLoss()
 corpus = data.Corpus(args.data)
 eval_batch_size = 10
 
+valid_data = batchify(corpus.valid, eval_batch_size)
 test_data = batchify(corpus.test, eval_batch_size)
 
+valid_loss = evaluate(valid_data)
 test_loss = evaluate(test_data)
 
+print 'Valid perplexity: ', math.exp(valid_loss)
 print 'Test perplexity: ', math.exp(test_loss)
 
