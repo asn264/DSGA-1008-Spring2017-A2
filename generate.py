@@ -55,6 +55,8 @@ if args.cuda:
 else:
     model.cpu()
 
+model.eval()
+
 corpus = data.Corpus(args.data)
 ntokens = len(corpus.dictionary)
 print 'vocab size: ', ntokens
