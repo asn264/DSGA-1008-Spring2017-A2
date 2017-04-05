@@ -76,8 +76,8 @@ model.eval()
 criterion = nn.CrossEntropyLoss()
 
 corpus = data.Corpus(args.data)
-eval_batch_size = 10
 
+eval_batch_size = 10
 test_data = batchify(corpus.test, eval_batch_size)
 
 test_loss = evaluate(test_data)
