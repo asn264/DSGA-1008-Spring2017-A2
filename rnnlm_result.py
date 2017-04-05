@@ -21,7 +21,6 @@ parser.add_argument('--bptt', type=int, default=20,
                     help='sequence length')
 args = parser.parse_args()
 
-
 def batchify(data, bsz):
 
 	'''Copied from starter code main.py file '''
@@ -48,7 +47,7 @@ def evaluate(data_source):
 	return total_loss[0] / len(data_source)
 
 
-def get_batch(source, i, evaluation=False):
+def get_batch(source, i, evaluation=True):
 
 	'''Copied from starter code main.py file '''
 
@@ -72,13 +71,19 @@ with open(args.checkpoint, 'rb') as f:
 	model = torch.load(f)
 
 model.cpu()
+model.eval()
 
 criterion = nn.CrossEntropyLoss()
 
 corpus = data.Corpus(args.data)
 eval_batch_size = 10
+
+valid_data = batchify(corpus.valid, eval_batch_size)
 test_data = batchify(corpus.test, eval_batch_size)
+
+valid_loss = evaluate(valid_data)
 test_loss = evaluate(test_data)
 
+print 'Valid perplexity: ', math.exp(valid_loss)
 print 'Test perplexity: ', math.exp(test_loss)
 
